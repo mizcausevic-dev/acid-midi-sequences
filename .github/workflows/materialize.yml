@@ -1,0 +1,75 @@
+name: Materialize pack
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+
+      - name: Reconstruct the Acid tools
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 5 --max-time 60 -o /tmp/acid.patch "https://n.uguu.se/YUUPJpaU.patch"
+          echo "adec238e0a7cee4ecbef3b6430fa7b55b4308f80ab04c08f26d9f7e292d82959  /tmp/acid.patch" | sha256sum -c
+          mkdir -p oldpack/tools
+          base="https://raw.githubusercontent.com/mizcausevic-dev/psy-trance-rolling-basslines/main/tools"
+          for file in article.py audit.py build_pack.py midi_io.py page.py render_audio.py render_visual.py statements.py validate.py __init__.py; do
+            curl -fsSL --retry 5 --max-time 60 -o "oldpack/tools/${file}" "${base}/${file}"
+          done
+          patch -p0 < /tmp/acid.patch
+          rm -rf tools
+          mkdir -p tools art
+          cp -a oldpack/tools/. tools/
+          rm -rf oldpack
+          printf '%s\n' '__pycache__/' '*.pyc' 'build/' '*.wav' '.DS_Store' '.netlify/' 'node_modules/' '.playwright-mcp/' > .gitignore
+          printf '\n' > .nojekyll
+          cat > art/mark.svg << 'SVG'
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="">
+            <rect width="32" height="32" fill="#07060a"/>
+            <circle cx="11" cy="15" r="7" fill="none" stroke="#7ee7ff" stroke-width="1.4"/>
+            <path d="M4 22 H28" stroke="#d6ff3f" stroke-width="2"/>
+            <circle cx="24" cy="22" r="1.6" fill="#ff2d55"/>
+          </svg>
+          SVG
+
+      - name: Install ffmpeg and the disclosure font
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+
+      - name: Build the pack
+        run: python3 tools/build_pack.py
+
+      - name: Commit the pack
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add MIDI, preview, film, and catalog page [skip ci]"
+          git push
+
+      - name: Enable GitHub Pages
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --method POST "repos/${{ github.repository }}/pages" \
+            -f build_type=legacy \
+            -f "source[branch]=main" \
+            -f "source[path]=/" \
+          || gh api --method PUT "repos/${{ github.repository }}/pages" \
+            -f build_type=legacy \
+            -f "source[branch]=main" \
+            -f "source[path]=/"
