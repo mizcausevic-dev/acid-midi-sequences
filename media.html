@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acid MIDI Sequences, media</title>
+  <meta name="description" content="Hero, square, portrait, poster, music preview, and film for Acid MIDI Sequences.">
+  <link rel="icon" href="art/mark.svg" type="image/svg+xml">
+  <style>
+    :root { color-scheme: dark; --ink:#07060a; --bone:#f4f1ea; --acid:#ff3ea5; --muted:#b7b3c7; --line:rgba(244,241,234,.16); }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--ink); color:var(--bone); font-family:"Segoe UI",sans-serif; line-height:1.5; }
+    header, main { width:min(1120px, calc(100% - 2rem)); margin:0 auto; }
+    a { color:var(--acid); }
+    h1 { font-size:clamp(2rem, 5vw, 3.4rem); line-height:.95; letter-spacing:-.03em; }
+    figure { margin:1.2rem 0; }
+    img, video, audio { width:100%; height:auto; background:#000; }
+    figcaption { color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <p><a href="index.html">Catalog</a></p>
+    <h1>Images, audio, and film</h1>
+    <p>These are the files in the repository. The picture reads “preview, not master”. Nothing plays until a control is used.</p>
+  </header>
+  <main>
+    <figure>
+      <img src="art/hero.jpg" width="1280" height="720" alt="Illustration of an abstract timing grid, a ring, a square-wave ribbon, and kick markers. Not a photograph.">
+      <figcaption><a href="art/hero.jpg">art/hero.jpg</a>, 1280 by 720.</figcaption>
+    </figure>
+    <div class="grid">
+      <figure>
+        <img src="art/square.jpg" width="1080" height="1080" alt="Square crop of the acid timing illustration.">
+        <figcaption><a href="art/square.jpg">art/square.jpg</a>, 1080 by 1080.</figcaption>
+      </figure>
+      <figure>
+        <img src="social/instagram-Cursor/portrait.jpg" width="1080" height="1350" alt="Portrait crop of the acid timing illustration.">
+        <figcaption><a href="social/instagram-Cursor/portrait.jpg">social/instagram-Cursor/portrait.jpg</a>, 1080 by 1350.</figcaption>
+      </figure>
+      <figure>
+        <img src="social/instagram-Cursor/square.jpg" width="1080" height="1080" alt="Square social still of the acid timing illustration.">
+        <figcaption><a href="social/instagram-Cursor/square.jpg">social/instagram-Cursor/square.jpg</a></figcaption>
+      </figure>
+      <figure>
+        <img src="social/x-Cursor/card.jpg" width="1600" height="900" alt="Wide card of the acid timing illustration.">
+        <figcaption><a href="social/x-Cursor/card.jpg">social/x-Cursor/card.jpg</a>, 1600 by 900.</figcaption>
+      </figure>
+      <figure>
+        <img src="film/poster.jpg" width="1280" height="720" alt="Film poster with the words preview, not master.">
+        <figcaption><a href="film/poster.jpg">film/poster.jpg</a></figcaption>
+      </figure>
+    </div>
+    <section>
+      <h2>Listen and watch</h2>
+      <audio controls preload="metadata" src="preview/preview.mp3"></audio>
+      <p><a href="preview/preview.mp3">preview/preview.mp3</a></p>
+      <video controls preload="metadata" poster="film/poster.jpg" width="1280" height="720">
+        <source src="film/preview.mp4" type="video/mp4">
+        <track kind="captions" src="film/preview.vtt" srclang="en" label="English" default>
+      </video>
+      <p><a href="film/preview.mp4">film/preview.mp4</a></p>
+    </section>
+    <section>
+      <h2>MIDI</h2>
+      <p><a href="midi/arrangement.mid">midi/arrangement.mid</a> is study 01, variation A, with its harmonic reference and kick-a. <a href="index.html">The catalog lists every part.</a></p>
+      <p>Use either the combined arrangement or the separate parts. Do not stack the part files on top of the combined file.</p>
+    </section>
+  </main>
+</body>
+</html>
