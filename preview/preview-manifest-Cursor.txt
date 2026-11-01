@@ -1,0 +1,68 @@
+preview, not a master
+{
+  "arrangement_path": "midi/arrangement.mid",
+  "arrangement_sha256": "4f5edacd9881b886503958e9cb5773ba4ae8b50918670c8b36803d899fb9b20b",
+  "encode": "libmp3lame CBR 192 kbps, mono source",
+  "excerpt": {
+    "bars": "1-16, the full container",
+    "end_tick": 61440,
+    "sequencing": "acid sequence variation A, harmonic reference, and kick-a together",
+    "start_tick": 0,
+    "study": "s01",
+    "transposition": "none"
+  },
+  "intermediate_wav": "build/preview.wav",
+  "intermediate_wav_note": "The WAV is gitignored build storage. The delivered preview is the MP3.",
+  "intermediate_wav_sha256": "fe2bfd581be52ddc31f1879ae4aebef0772600c1fbfec23dbcabaaf1689bf18d",
+  "label": "preview, not a master",
+  "listening": "No human listening audition was performed for this build.",
+  "mapping": {
+    "acid-sequence": "saw through a one-pole lowpass, short decay; accent is velocity only, glide is not encoded",
+    "bassline": "saw through a one-pole lowpass, short decay",
+    "harmonic-reference": "triangle, slow decay",
+    "kick-reference": "falling sine plus a deterministic 4 ms noise click"
+  },
+  "mp3_encode_command": [
+    "ffmpeg",
+    "-y",
+    "-i",
+    "/home/runner/work/acid-midi-sequences/acid-midi-sequences/build/preview.wav",
+    "-codec:a",
+    "libmp3lame",
+    "-b:a",
+    "192k",
+    "/home/runner/work/acid-midi-sequences/acid-midi-sequences/preview/preview.mp3"
+  ],
+  "mp3_path": "preview/preview.mp3",
+  "mp3_sha256": "3deab9cd85e3457a25b83ce460115ebfaf97a2972a36d9739f6772070d679108",
+  "pack_id": "acid-midi-sequences",
+  "program_changes": "No program changes are encoded. A conventional GM player will normally use its default piano program for pitched channels unless configured otherwise; compatible GM channel 10 percussion is treated separately. Player behavior may vary.",
+  "renderer": "simple-synth-1.0.0",
+  "renderer_note": "These voices are preview mappings. They are not encoded in the MIDI file.",
+  "rounding": "sample = floor(seconds * sample_rate + 0.5), computed from tick 0; intervals are not summed",
+  "sample_peak": 19917,
+  "sample_peak_dbfs": -4.324520231862702,
+  "sample_peak_note": "This is a sample peak of the integer mix after scaling. It is not a true-peak measurement and it is not LUFS.",
+  "score_seconds": 29.538432,
+  "score_sha256": "77c4a87a32036748546924787e35211d9e1d81d4cf053f9e293b3d10592a8e21",
+  "seconds_encoded": 29.570612,
+  "source_parts": [
+    {
+      "id": "s01.seq.a",
+      "path": "midi/s01-offbeat-squelch/acid-sequence-a.mid",
+      "sha256": "22f83514aa3b89b574d5a4598500178fb31334914fd510208e32e5ae0824d732"
+    },
+    {
+      "id": "s01.harmonic",
+      "path": "midi/s01-offbeat-squelch/harmonic-reference.mid",
+      "sha256": "d299b43a15698b50b483f8dc5dd8812a9ddfa3053aacf8bbc9a686724207b7a3"
+    },
+    {
+      "id": "s01.kick.a",
+      "path": "midi/s01-offbeat-squelch/kick-a.mid",
+      "sha256": "7e364c50a32367bbb66c6291b11e614b7bfd350c9b2732c2f7e7512de517eec3"
+    }
+  ],
+  "tempo_authority": "encoded MIDI tempo",
+  "tempo_us": 461538
+}
